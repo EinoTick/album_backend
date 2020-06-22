@@ -4,6 +4,7 @@ const app = express();
 //Add routes
 const authRoute = require('./routes/auth');
 const dataRoute = require('./routes/webData');
+const albumRoute = require('./routes/album');
 
 //Connect to database
 const mongoose = require('mongoose');
@@ -23,6 +24,7 @@ app.use(express.json());
 //Middleware routes
 app.use('/api/user', authRoute);
 app.use('/api/data', dataRoute);
+app.use('/api/album', albumRoute);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server is running at port ${port}`));
