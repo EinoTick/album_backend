@@ -10,4 +10,8 @@ router.get('/', tokenVerification, (req, res) => {
   });
 });
 
+router.post('/add', tokenVerification, (req, res) => {
+
+});
+
 module.exports = router;

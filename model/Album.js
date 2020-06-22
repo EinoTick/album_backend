@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
-
-const PictureSchema = mongoose.Schema({
+const pictureSchema = mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -21,7 +20,7 @@ const PictureSchema = mongoose.Schema({
 
 });
 
-const AlbumSchema = mongoose.Schema({
+const albumSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -36,5 +35,8 @@ const AlbumSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  pictures: [PictureSchema]
+  //pictures: [PictureSchema]
 });
+
+
+module.exports = mongoose.model('Album', albumSchema);
