@@ -28,13 +28,13 @@ const albumSchema = mongoose.Schema({
     max: 255
   },
   author: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'User'
+    type: String,
+    required: true
   },
   date: {
     type: Date,
     default: Date.now
-  },
+  }
   //pictures: [PictureSchema]
 });
 

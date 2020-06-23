@@ -50,8 +50,6 @@ router.post('/login', async (req, res) => {
 
   const jwToken = jwt.sign({_id: account._id }, process.env.JWT_SECRET);
   res.header('auth-token', jwToken).send(jwToken);
-
-
 });
 
 

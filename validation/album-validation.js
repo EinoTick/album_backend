@@ -2,12 +2,8 @@ const Joi = require('@hapi/joi');
 
 const albumValidation = data => {
   const schema = Joi.object({
-    name: Joi.string()
-      .min(6)
-      .max(255)
-      .required(),
-    author: Joi.string()
-      .min(6)
+    title: Joi.string()
+      .min(4)
       .max(255)
       .required(),
     date: {
@@ -18,4 +14,4 @@ const albumValidation = data => {
   return schema.validate(data);
 };
 
-module.exports.loginValidation = albumValidation;
+module.exports.albumValidation = albumValidation;
