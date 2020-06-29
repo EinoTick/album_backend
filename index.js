@@ -5,6 +5,7 @@ const app = express();
 const authRoute = require('./routes/auth');
 const dataRoute = require('./routes/webData');
 const albumRoute = require('./routes/album');
+const pictureRoute = require('./routes/picture');
 
 //Connect to database
 const mongoose = require('mongoose');
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use('/api/user', authRoute);
 app.use('/api/data', dataRoute);
 app.use('/api/album', albumRoute);
+app.use('/api/pictures', albumRoute);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server is running at port ${port}`));
