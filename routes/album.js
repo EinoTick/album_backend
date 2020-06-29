@@ -5,6 +5,17 @@ const Album = require('../model/Album');
 const User = require('../model/User');
 
 
+router.get('/all', tokenVerification, async (req, res) => {
+  try {
+    const album = await Album.find();
+    res.send(album);
+  } catch (e) {
+    res.send(e);
+  }
+
+});
+
+
 //5ef9c8d8e5eabf2788fa47c2 <-- test1 id
 router.get('/find/:albumId', tokenVerification, async (req, res) => {
   const albumId = req.params.albumId;
@@ -17,7 +28,7 @@ router.get('/find/:albumId', tokenVerification, async (req, res) => {
   }
 });
 
-
+//#ToDo: lisää try catch kaikkiin
 router.post('/new', tokenVerification, async (req, res) => {
   const validation = albumValidation(req.body);
   const {value, error} = validation;
@@ -40,11 +51,6 @@ router.post('/new', tokenVerification, async (req, res) => {
   } catch (e) {
     res.status(400).send(e);
   }
-});
-
-
-router.get('/all', tokenVerification, async (req, res) => {
-  res.send('Get all albums')
 });
 
 
