@@ -19,7 +19,6 @@ router.post('/register', async (req, res) => {
   const emailExist = await User.findOne({email: req.body.email});
   if (emailExist) return res.status(400).send('This email address is reserved for already existing account');
 
-  //res.send(validation);
   //Create user instance
   const user = new User({
     name: req.body.name,

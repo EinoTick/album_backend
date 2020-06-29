@@ -17,7 +17,6 @@ const pictureSchema = mongoose.Schema({
     min: 6,
     max: 255
   }
-
 });
 
 const albumSchema = mongoose.Schema({
@@ -35,8 +34,7 @@ const albumSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   }
-  //pictures: [PictureSchema]
 });
 
-
+//pictures: [PictureSchema]
 module.exports = mongoose.model('Album', albumSchema);

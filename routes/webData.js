@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const tokenVerification = require('./protectedRoutes');
 
+
 router.get('/', tokenVerification, (req, res) => {
   res.json({
     webData: {
