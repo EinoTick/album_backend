@@ -4,13 +4,17 @@ const {albumValidation} = require('./../validation/album-validation');
 const Album = require('../model/Album');
 const User = require('../model/User');
 
-router.get('/', tokenVerification, (req, res) => {
-  res.json({
-    album: {
-      picture: 'pic',
-      url: 'no'
-    }
-  });
+
+//5ef9c8d8e5eabf2788fa47c2 <-- test1 id
+router.get('/find/:albumId', tokenVerification, async (req, res) => {
+  const albumId = req.params.albumId;
+  try {
+    const albumExist = await Album.findOne({_id: albumId});
+    if (!albumExist) return res.send('Could not find the album!');
+    res.send(albumExist);
+  } catch (e) {
+    return res.status(400).send('Incorrect parameter format');
+  }
 });
 
 
