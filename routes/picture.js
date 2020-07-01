@@ -8,8 +8,24 @@ const Album = require('../model/Album');
 
 router.get('/all', tokenVerification, async (req, res) => {
   try {
-    const pictures = await Picture.find();
+    const pictures = await Picture.find().populate('album');
     res.send(pictures);
+  } catch (e) {
+    res.send(e);
+  }
+});
+
+/* Get pictures related to a specific album */
+router.get('/album/:albumId', tokenVerification, async (req, res) => {
+  const albumId = req.params.albumId;
+  try {
+    const currentAlbum = await Album.findOne({ _id: albumId });
+    if (!currentAlbum) return res.status(400).send("Could not find the album");
+
+    const pictures = await Picture.find({ album: currentAlbum });
+    if (!pictures) return res.status(400).send('Album is empty');
+    res.send(pictures);
+
   } catch (e) {
     res.send(e);
   }

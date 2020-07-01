@@ -7,7 +7,7 @@ const User = require('../model/User');
 
 router.get('/all', tokenVerification, async (req, res) => {
   try {
-    const album = await Album.find();
+    const album = await Album.find().populate('pictures');
     res.send(album);
   } catch (e) {
     res.send(e);
