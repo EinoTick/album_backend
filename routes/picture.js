@@ -3,6 +3,7 @@ const tokenVerification = require('./protectedRoutes');
 const {pictureValidation} = require('./../validation/picture-validation');
 const User = require('../model/User');
 const Picture = require('../model/Picture');
+const Album = require('../model/Album');
 
 
 router.get('/all', tokenVerification, async (req, res) => {
@@ -27,9 +28,13 @@ router.post('/new', tokenVerification, async (req, res) => {
   const account = await User.findOne({_id: req.user._id});
   if (!account) return res.status(400).send('Error, please contact admins!');
 
+  const album = await Album.findOne({_id: req.body.albumId});
+  if (!album) return res.status(400).send('Could not find the album!');
+
   const picture = new Picture({
     title: req.body.title,
     pictureUrl: req.body.pictureUrl,
+    album: album
   });
 
   try {

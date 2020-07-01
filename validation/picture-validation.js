@@ -10,6 +10,10 @@ const pictureValidation = data => {
       .min(4)
       .max(1000)
       .required(),
+    albumId: Joi.string()
+      .min(4)
+      .max(50)
+      .required(),
   });
   return schema.validate(data);
 };

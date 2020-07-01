@@ -1,25 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const pictureSchema = mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-    min: 6,
-    max: 255
-  },
-  date: {
-    type: Date,
-    default: Date.now
-  },
-  pictureUrl:  {
-    type: String,
-    required: true,
-    min: 6,
-    max: 255
-  }
-});
-
-const albumSchema = mongoose.Schema({
+const albumSchema = Schema({
   name: {
     type: String,
     required: true,
@@ -33,7 +15,11 @@ const albumSchema = mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  pictures: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Picture'
+  }]
 });
 
 //pictures: [PictureSchema]

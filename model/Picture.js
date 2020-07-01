@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const pictureSchema = mongoose.Schema({
   title: {
@@ -16,7 +17,11 @@ const pictureSchema = mongoose.Schema({
     required: true,
     min: 6,
     max: 1000
-  }
+  },
+  album: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Album'
+  }]
 });
 
 module.exports = mongoose.model('Picture', pictureSchema);
