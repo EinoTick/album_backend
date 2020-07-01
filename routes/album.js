@@ -4,7 +4,7 @@ const {albumValidation} = require('./../validation/album-validation');
 const Album = require('../model/Album');
 const User = require('../model/User');
 
-
+/* Get all albums */
 router.get('/all', tokenVerification, async (req, res) => {
   try {
     const album = await Album.find().populate('pictures');
@@ -14,7 +14,7 @@ router.get('/all', tokenVerification, async (req, res) => {
   }
 });
 
-//5ef9c8d8e5eabf2788fa47c2 <-- test1 id
+/* Find album by id */
 router.get('/find/:albumId', tokenVerification, async (req, res) => {
   const albumId = req.params.albumId;
   try {
@@ -26,7 +26,7 @@ router.get('/find/:albumId', tokenVerification, async (req, res) => {
   }
 });
 
-//#ToDo: lisää try catch kaikkiin
+/* Create new album */
 router.post('/new', tokenVerification, async (req, res) => {
   const validation = albumValidation(req.body);
   const {value, error} = validation;
@@ -50,6 +50,5 @@ router.post('/new', tokenVerification, async (req, res) => {
     res.status(400).send(e);
   }
 });
-
 
 module.exports = router;
