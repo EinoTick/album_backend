@@ -26,7 +26,7 @@ app.use(express.json());
 app.use('/api/user', authRoute);
 app.use('/api/data', dataRoute);
 app.use('/api/album', albumRoute);
-app.use('/api/pictures', albumRoute);
+app.use('/api/pictures', pictureRoute);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server is running at port ${port}`));

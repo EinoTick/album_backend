@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const tokenVerification = require('./protectedRoutes');
 const {pictureValidation} = require('./../validation/picture-validation');
-const Album = require('../model/Album');
 const User = require('../model/User');
 const Picture = require('../model/Picture');
 
@@ -22,20 +21,20 @@ router.post('/new', tokenVerification, async (req, res) => {
   const {value, error} = validation;
   if (error) return res.status(400).send(error.details[0].message);
 
-  const pictureExist = await Picture.findOne({name: req.body.name});
+  const pictureExist = await Picture.findOne({title: req.body.title});
   if (pictureExist) return res.status(400).send('Name already exist');
 
   const account = await User.findOne({_id: req.user._id});
   if (!account) return res.status(400).send('Error, please contact admins!');
 
-  const album = new Album({
-    name: req.body.name,
-    author: req.user._id,
+  const picture = new Picture({
+    title: req.body.title,
+    pictureUrl: req.body.pictureUrl,
   });
 
   try {
-    const savedAlbum = await album.save();
-    res.send(savedAlbum);
+    const savedPicture = await picture.save();
+    res.send(savedPicture);
   } catch (e) {
     res.status(400).send(e);
   }
