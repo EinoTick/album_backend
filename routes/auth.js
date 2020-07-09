@@ -7,20 +7,16 @@ const jwt = require('jsonwebtoken');
 /* Create new user */
 router.post('/register', async (req, res) => {
   try {
-    //Validate user information
     const validation = registerValidation(req.body);
     const {value, error} = validation;
     if (error) return res.status(400).send(error.details[0].message);
 
-    /* Password hashing with bcrypt */
     const salt = await bcrypt.genSaltSync(12);
     const hash = await bcrypt.hashSync(req.body.password, salt);
 
-    //Check for email duplicates
     const emailExist = await User.findOne({email: req.body.email});
     if (emailExist) return res.status(400).send('This email address is reserved for already existing account');
 
-    //Create user instance
     const user = new User({
       name: req.body.name,
       email: req.body.email,

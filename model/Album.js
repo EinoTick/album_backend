@@ -22,5 +22,4 @@ const albumSchema = Schema({
   }]
 });
 
-//pictures: [PictureSchema]
 module.exports = mongoose.model('Album', albumSchema);

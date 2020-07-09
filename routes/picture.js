@@ -54,7 +54,6 @@ router.post('/new', tokenVerification, async (req, res) => {
     });
     const savedPicture = await picture.save();
     res.send(savedPicture);
-
   } catch (e) {
     res.status(400).send(e);
   }
