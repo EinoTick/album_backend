@@ -23,8 +23,8 @@ mongoose.connect(process.env.DB_AUTHENTICATION,
 app.use(express.json());
 
 //Middleware routes
+app.use('/api', dataRoute);
 app.use('/api/user', authRoute);
-app.use('/api/data', dataRoute);
 app.use('/api/album', albumRoute);
 app.use('/api/pictures', pictureRoute);
 
